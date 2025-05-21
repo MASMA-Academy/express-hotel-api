@@ -1,0 +1,15 @@
+{
+  "tasks": {
+    "start": "deno run --allow-net --allow-read --allow-env --allow-ffi main.ts",
+    "test": "deno test --allow-net --allow-read --allow-env --allow-ffi"
+  },
+  "nodeModulesDir": "auto",
+  "imports": {
+    "express": "npm:express@4.18.2",
+    "pg": "npm:pg@8.11.3",
+    "cors": "npm:cors@2.8.5",
+    "jsonwebtoken": "npm:jsonwebtoken@9.0.2",
+    "bcrypt": "npm:bcrypt@5.1.1",
+    "dotenv": "npm:dotenv@16.3.1"
+  }
+}
