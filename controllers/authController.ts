@@ -1,6 +1,6 @@
 import { Request, Response } from "../deps.ts";
 import { bcrypt } from "../deps.ts";
-import { createUser, findUserByEmail } from "../models/userModel.ts";
+import { createUser, findUserByEmail, promoteAdmin } from "../models/userModel.ts";
 import { generateToken } from "../utils/jwt.ts";
 
 export const register = async (req: Request, res: Response) => {
@@ -77,6 +77,33 @@ export const login = async (req: Request, res: Response) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token,
+    });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error
+      ? error.message
+      : "An unknown error occurred";
+    res.status(500).json({ message: errorMessage });
+  }
+};
+
+
+export const promote = async (req: Request, res: Response) => {
+  try {
+    const user = await promoteAdmin(req.body.email);
+
+    // Debug log
+    console.log("Promoted user:", {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+
+    res.status(201).json({
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin
     });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error

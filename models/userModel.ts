@@ -66,3 +66,16 @@ export const createAdminUser = async (
     isAdmin: true,
   });
 };
+
+
+export const promoteAdmin = async (
+  email: string):  Promise<User> => {
+  const result = await db.query("UPDATE users SET is_admin = TRUE WHERE email = $1", [email]);
+  
+  // Map database fields to TypeScript model
+  const user = result.rows[0];
+  return {
+    ...user,
+    isAdmin: true,
+  };
+};
