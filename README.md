@@ -105,6 +105,21 @@ deno task test
 - `DB_USER` - PostgreSQL username
 - `DB_PASSWORD` - PostgreSQL password
 - `DB_NAME` - PostgreSQL database name
+- `ADMIN_USERNAME` - Default admin username (default: "admin")
+- `ADMIN_EMAIL` - Default admin email (default: "admin@example.com")
+- `ADMIN_PASSWORD` - Default admin password (default: "admin123")
+
+## Default Admin User
+
+On the first run of the application, if no admin users exist in the database, a
+default admin user will be created automatically with the following credentials:
+
+- Username: admin (or the value of ADMIN_USERNAME environment variable)
+- Email: admin@example.com (or the value of ADMIN_EMAIL environment variable)
+- Password: admin123 (or the value of ADMIN_PASSWORD environment variable)
+
+**Important Security Note**: This default password should be changed immediately
+in a production environment!
 
 ## Database Schema
 

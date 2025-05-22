@@ -11,3 +11,4 @@ router.put("/:id", protect, adminOnly, RoomController.updateRoom);
 router.delete("/:id", protect, adminOnly, RoomController.deleteRoom);
 
 export { router as roomRouter };
+ 

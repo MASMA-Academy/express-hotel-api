@@ -1,436 +1,614 @@
 {
-  "info": {
-    "name": "Hotel API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "API for hotel booking system"
-  },
-  "item": [
-    {
-      "name": "Auth",
-      "item": [
-        {
-          "name": "Register",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/auth/register",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "auth", "register"]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"username\": \"testuser\",\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
-            },
-            "description": "Register a new user"
-          }
-        },
-        {
-          "name": "Login",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/auth/login",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "auth", "login"]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
-            },
-            "description": "Login a user and get JWT token"
-          }
-        }
-      ],
-      "description": "Authentication endpoints"
-    },
-    {
-      "name": "Hotels",
-      "item": [
-        {
-          "name": "Get All Hotels",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/hotels",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "hotels"]
-            },
-            "description": "Get all hotels"
-          }
-        },
-        {
-          "name": "Get Hotel by ID",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/hotels/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "hotels", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Hotel ID"
-                }
-              ]
-            },
-            "description": "Get hotel by ID"
-          }
-        },
-        {
-          "name": "Create Hotel",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/hotels",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "hotels"]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"Grand Hotel\",\n    \"location\": \"New York\",\n    \"description\": \"A luxurious hotel in the heart of the city\",\n    \"rating\": 4.5,\n    \"imageUrl\": \"https://example.com/hotel.jpg\"\n}"
-            },
-            "description": "Create a new hotel (Admin only)"
-          }
-        },
-        {
-          "name": "Update Hotel",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/hotels/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "hotels", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Hotel ID"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"Grand Hotel Updated\",\n    \"location\": \"New York\",\n    \"description\": \"An updated description of this luxurious hotel\",\n    \"rating\": 4.7,\n    \"imageUrl\": \"https://example.com/hotel-updated.jpg\"\n}"
-            },
-            "description": "Update a hotel (Admin only)"
-          }
-        },
-        {
-          "name": "Delete Hotel",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/hotels/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "hotels", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Hotel ID"
-                }
-              ]
-            },
-            "description": "Delete a hotel (Admin only)"
-          }
-        }
-      ],
-      "description": "Hotel management endpoints"
-    },
-    {
-      "name": "Rooms",
-      "item": [
-        {
-          "name": "Get Rooms by Hotel",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/rooms/hotel/:hotelId",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "rooms", "hotel", ":hotelId"],
-              "variable": [
-                {
-                  "key": "hotelId",
-                  "value": "1",
-                  "description": "Hotel ID"
-                }
-              ]
-            },
-            "description": "Get all rooms for a specific hotel"
-          }
-        },
-        {
-          "name": "Get Room by ID",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/api/rooms/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "rooms", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Room ID"
-                }
-              ]
-            },
-            "description": "Get room by ID"
-          }
-        },
-        {
-          "name": "Create Room",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/rooms",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "rooms"]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"hotelId\": 1,\n    \"roomNumber\": \"101\",\n    \"type\": \"Deluxe\",\n    \"price\": 150,\n    \"capacity\": 2\n}"
-            },
-            "description": "Create a new room (Admin only)"
-          }
-        },
-        {
-          "name": "Update Room",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/rooms/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "rooms", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Room ID"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"hotelId\": 1,\n    \"roomNumber\": \"101\",\n    \"type\": \"Deluxe Suite\",\n    \"price\": 180,\n    \"capacity\": 3,\n    \"available\": true\n}"
-            },
-            "description": "Update a room (Admin only)"
-          }
-        },
-        {
-          "name": "Delete Room",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/rooms/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "rooms", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Room ID"
-                }
-              ]
-            },
-            "description": "Delete a room (Admin only)"
-          }
-        }
-      ],
-      "description": "Room management endpoints"
-    },
-    {
-      "name": "Bookings",
-      "item": [
-        {
-          "name": "Get User Bookings",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/bookings",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "bookings"]
-            },
-            "description": "Get bookings for the authenticated user"
-          }
-        },
-        {
-          "name": "Get Booking by ID",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/bookings/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "bookings", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Booking ID"
-                }
-              ]
-            },
-            "description": "Get booking by ID (Must be owned by user or admin)"
-          }
-        },
-        {
-          "name": "Create Booking",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/bookings",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "bookings"]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"roomId\": 1,\n    \"checkIn\": \"2023-10-15\",\n    \"checkOut\": \"2023-10-20\",\n    \"guests\": 2\n}"
-            },
-            "description": "Create a new booking"
-          }
-        },
-        {
-          "name": "Cancel Booking",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{authToken}}",
-                "description": "JWT Token"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/api/bookings/:id/cancel",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "bookings", ":id", "cancel"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Booking ID"
-                }
-              ]
-            },
-            "description": "Cancel a booking (Must be owned by user or admin)"
-          }
-        }
-      ],
-      "description": "Booking management endpoints"
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:3000",
-      "type": "string",
-      "description": "Base URL for the API"
-    },
-    {
-      "key": "authToken",
-      "value": "YOUR_JWT_TOKEN",
-      "type": "string",
-      "description": "JWT Authentication token"
-    }
-  ]
-} 
+	"info": {
+		"_postman_id": "b6b193f9-50ae-4720-b918-f1663412f4ab",
+		"name": "Hotel API",
+		"description": "API for hotel booking system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34921941"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testuser\",\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body contains access token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.token).to.be.a('string');",
+									"    pm.collectionVariables.set(\"authToken\", jsonData.token);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login a user and get JWT token"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body contains access token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.token).to.be.a('string');",
+									"    pm.collectionVariables.set(\"authToken\", jsonData.token);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login a user and get JWT token"
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication endpoints"
+		},
+		{
+			"name": "Hotels",
+			"item": [
+				{
+					"name": "Get All Hotels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/hotels",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"hotels"
+							]
+						},
+						"description": "Get all hotels"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hotel by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/hotels/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"hotels",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Hotel ID"
+								}
+							]
+						},
+						"description": "Get hotel by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Hotel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Grand Hotel\",\n    \"location\": \"New York\",\n    \"description\": \"A luxurious hotel in the heart of the city\",\n    \"rating\": 4.5,\n    \"imageUrl\": \"https://example.com/hotel.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/hotels",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"hotels"
+							]
+						},
+						"description": "Create a new hotel (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Hotel",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Grand Hotel Updated\",\n    \"location\": \"New York\",\n    \"description\": \"An updated description of this luxurious hotel\",\n    \"rating\": 4.7,\n    \"imageUrl\": \"https://example.com/hotel-updated.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/hotels/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"hotels",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Hotel ID"
+								}
+							]
+						},
+						"description": "Update a hotel (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Hotel",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/hotels/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"hotels",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Hotel ID"
+								}
+							]
+						},
+						"description": "Delete a hotel (Admin only)"
+					},
+					"response": []
+				}
+			],
+			"description": "Hotel management endpoints"
+		},
+		{
+			"name": "Rooms",
+			"item": [
+				{
+					"name": "Get Rooms by Hotel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/rooms/hotel/:hotelId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"hotel",
+								":hotelId"
+							],
+							"variable": [
+								{
+									"key": "hotelId",
+									"value": "1",
+									"description": "Hotel ID"
+								}
+							]
+						},
+						"description": "Get all rooms for a specific hotel"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Room by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/rooms/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Room ID"
+								}
+							]
+						},
+						"description": "Get room by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Room",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hotelId\": 1,\n    \"roomNumber\": \"101\",\n    \"type\": \"Deluxe\",\n    \"price\": 150,\n    \"capacity\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/rooms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"rooms"
+							]
+						},
+						"description": "Create a new room (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Room",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hotelId\": 1,\n    \"roomNumber\": \"101\",\n    \"type\": \"Deluxe Suite\",\n    \"price\": 180,\n    \"capacity\": 3,\n    \"available\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/rooms/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Room ID"
+								}
+							]
+						},
+						"description": "Update a room (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Room",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/rooms/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Room ID"
+								}
+							]
+						},
+						"description": "Delete a room (Admin only)"
+					},
+					"response": []
+				}
+			],
+			"description": "Room management endpoints"
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "Get User Bookings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						},
+						"description": "Get bookings for the authenticated user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Booking ID"
+								}
+							]
+						},
+						"description": "Get booking by ID (Must be owned by user or admin)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomId\": 1,\n    \"checkIn\": \"2023-10-15\",\n    \"checkOut\": \"2023-10-20\",\n    \"guests\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						},
+						"description": "Create a new booking"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": "JWT Token"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings/:id/cancel",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								":id",
+								"cancel"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Booking ID"
+								}
+							]
+						},
+						"description": "Cancel a booking (Must be owned by user or admin)"
+					},
+					"response": []
+				}
+			],
+			"description": "Booking management endpoints"
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "authToken",
+			"value": "YOUR_JWT_TOKEN",
+			"type": "string"
+		}
+	]
+}

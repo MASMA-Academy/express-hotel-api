@@ -1,11 +1,14 @@
-import { cors, dotenv, express, Request, Response } from "./deps.ts";
+import { cors, dotenv, express, loadEnv, Request, Response } from "./deps.ts";
 import { authRouter } from "./routes/authRoutes.ts";
 import { hotelRouter } from "./routes/hotelRoutes.ts";
 import { roomRouter } from "./routes/roomRoutes.ts";
 import { bookingRouter } from "./routes/bookingRoutes.ts";
 import { errorHandler } from "./middlewares/errorMiddleware.ts";
 
-// Load environment variables
+// Load environment variables from .env file
+const env = loadEnv({ export: true });
+
+// Configure dotenv as well for compatibility with Node.js packages
 dotenv.config();
 
 const app = express();

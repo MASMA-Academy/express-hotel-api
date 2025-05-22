@@ -11,3 +11,4 @@ router.put("/:id", protect, adminOnly, HotelController.updateHotel);
 router.delete("/:id", protect, adminOnly, HotelController.deleteHotel);
 
 export { router as hotelRouter };
+ 

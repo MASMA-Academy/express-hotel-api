@@ -21,6 +21,14 @@ export const register = async (req: Request, res: Response) => {
     // Generate JWT
     const token = generateToken({ userId: user.id, isAdmin: user.isAdmin });
 
+    // Debug log
+    console.log("Registered user:", {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+
     res.status(201).json({
       id: user.id,
       username: user.username,
@@ -54,6 +62,14 @@ export const login = async (req: Request, res: Response) => {
 
     // Generate JWT
     const token = generateToken({ userId: user.id, isAdmin: user.isAdmin });
+
+    // Debug log
+    console.log("Logged in user:", {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
 
     res.json({
       id: user.id,
